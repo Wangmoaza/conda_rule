@@ -17,7 +17,9 @@ conda와 함께하는 슬기로운 서버생활
     2. 가상환경 실행
     3. 가상환경 관리
     4. 가상환경에서 pip 사용하기
-    5. 가상환경 제거
+    5. 가상환경에 패키지 설치
+        1. bioconda를 이용한 패키지 설치
+    6. 가상환경 제거
 3. 맺으며
 
 ---
@@ -74,16 +76,9 @@ $ conda create --name [name]
 $ conda create -n [name] python=3.4
 ```
 
-특정 패키지를 함께 깔아주고 싶을 때는
+패키지 생성 시점에서 특정 패키지를 함께 깔아주고 싶을 때는
 ```shell
 $ conda create -n [name] scipy numpy
-```
-
-혹은
-
-```shell
-$ conda create -n [name] python
-$ conda install -n [name] scipy
 ```
 
 특정 버전의 패키지를 깔고 싶을 때는
@@ -105,7 +100,7 @@ TIP: 패키지간 dependency가 다를 수 있으므로 여러 패키지를 설�
 conda environment를 활성화 시킬 때는
 
 ```shell
-$ source activate [name]
+$ conda activate [name]
 ```
 
 자신의 가상환경이 활성화 되어있으면 커맨드창이 다음과 같이 뜰 것입니다.
@@ -117,7 +112,7 @@ $ source activate [name]
 가상환경을 비활성화 시키고 싶으면
 
 ```shell
-(name) $ source deactivate
+(name) $ conda deactivate
 ```
 
 ### 2-3. 가상환경 관리
@@ -152,7 +147,7 @@ $ conda list -n [name]
 
 ```shell
 $ conda install -n [name] pip
-$ source activate [name]
+$ conda activate [name]
 (name) $ pip <pip_subcommand>
 ```
 
@@ -185,7 +180,86 @@ pip is /home/omics/miniconda2/envs/name/bin/pip
 > * pip accepts a list of Python packages with -r or –requirements
 > * conda env will export or create environments based on a file with conda and pip requirements
 
-### 2-5. 가상환경 제거
+
+### 2-5. 가상환경에 package 설치
+
+2-1에서 언급한 것 처럼 가상환경을 생성하는 시점에서 패키지를 함께 설치하는 것이 권장되지만 가상환경을 사용하는 중간에 패캐지를 새로 설치하고 싶을 때도 많이 있습니다.
+
+가상 환경 밖에서 설치하는 방법
+
+```shell
+$ conda install -n [name] scipy
+```
+
+가상환경을 실행시킨 후 설치하는 방법
+
+```shell
+$ conda activate name
+(name) $ conda install scipy
+```
+
+
+#### 2-5-1. bioconda를 이용한 패키지 설치
+
+conda의 기본 채널 이외에 다양한 채널들이 존재하는데 이 중 하나가 bioconda입니다.
+우리가 사용하는 다양한 bioinformatics tool들이 bioconda에 있다면 이를 이용해 설치할 수 있습니다.
+conda를 이용해 설치를 하면 PATH에 따로 경로를 올려놓지 않아도 가상환경 내에서 바로 실행이 가능합니다.
+이 방법이 항상 최선은 아니지만 대중적으로 이용되고 관리가 잘 되어있는 tool들은 conda로 설치하는 것이 사용하기 편할 것입니다.
+몇몇 패키지들은 특정 파이썬 버전에 dependent하기 때문에 확인 후 설치 바랍니다.
+
+최초 1회 다양한 채널을 추가해놓고 바로 설치를 하는 방법
+
+```shell
+$ conda config --add channels conda-forge
+$ conda config --add channels defaults
+$ conda config --add channels r
+$ conda config --add channels bioconda
+```
+
+```shell
+$ conda install bowtie2
+$ conda install bedtools
+```
+
+그때 그때 채널을 지정해놓고 설치를 하는 방법
+
+```shell
+$ conda install -c bioconda picard
+```
+
+
+conda로 설치할 수 있는 tool들 예시
+
+```
+$ conda install cutadapt
+$ conda install meme
+$ conda install fastqc
+$ conda install fastx_toolkit
+$ conda install bowtie
+$ conda install bowtie2
+$ conda install prinseq
+$ conda install circos
+$ conda install tophat
+$ conda install cufflinks
+$ conda install samtools
+$ conda install bedtools
+$ conda install sra-tools
+$ conda install trimmomatic
+$ conda install paralyzer
+$ conda install star
+$ conda install rsem
+$ conda install bwa
+$ conda install picard
+$ conda install subread
+$ conda install entrez-direct
+$ conda install art
+$ conda install macs2
+$ conda install htseq
+$ conda install rseqc
+```
+
+
+### 2-6. 가상환경 제거
 
 ```shell
 $ conda remove --name [name] --all
