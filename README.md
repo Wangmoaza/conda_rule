@@ -273,7 +273,7 @@ $ conda remove --name [name] --all
 ```shell
 
 # haeun이라는 python2 가상환경을 만든다.
-$ conda create -n [haeun] python=2.7
+$ conda create -n haeun python=2.7
 
 # 가상환경을 실행한다.
 $ conda activate haeun
