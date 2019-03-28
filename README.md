@@ -20,7 +20,8 @@ conda와 함께하는 슬기로운 서버생활
     5. 가상환경에 패키지 설치
         1. bioconda를 이용한 패키지 설치
     6. 가상환경 제거
-3. 맺으며
+3. Quick Start
+4. 맺으며
 
 ---
 ## 0. 소개
@@ -265,6 +266,37 @@ $ conda install rseqc
 $ conda remove --name [name] --all
 ```
 
+---
+
+## 3. Quick Start
+
+```shell
+
+# haeun이라는 python2 가상환경을 만든다.
+$ conda create -n [haeun] python=2.7
+
+# 가상환경을 실행한다.
+$ conda activate haeun
+
+#가상환경이 실행 됐다.
+(haeun) $
+
+# scipy 패키지를 설치한다.
+(haeun) $ conda install scipy
+
+# bioconda에 있는 bedtools 패키지를 설치한다.
+(haeun) $ conda install -c bioconda bedtools
+
+# 가상환경에서 빠져 나온다.
+(haeun) $ conda deactivate
+
+# 빠져나왔다.
+$
+
+# conda 버전에 따라 이렇게 보일 수도 있다.
+(base) $
+
+```
 ---
 ## 맺으며
 
